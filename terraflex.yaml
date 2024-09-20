@@ -1,0 +1,28 @@
+stacks:
+  main:
+    state_storage:
+      params:
+        path: terraform.tfstate
+      provider: git
+    transformers:
+    - encryption
+storage_providers:
+  encryption:
+    file_mode: 384
+    folder: ~/secrets
+    folder_mode: 448
+    type: local
+  git:
+    clone_path: null
+    origin_url: git@github.com:IamShobe/tf-state-example.git
+    ref: main
+    type: git
+transformers:
+  encryption:
+    import_from_storage:
+      params:
+        path: tf-state.txt
+      provider: encryption
+    key_type: age
+    type: encryption
+version: '2'
