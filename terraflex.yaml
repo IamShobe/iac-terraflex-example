@@ -2,7 +2,7 @@ stacks:
   main:
     state_storage:
       params:
-        path: terraform.tfstate
+        path: terraform-1password.tfstate
       provider: git
     transformers:
     - encryption
@@ -17,12 +17,25 @@ storage_providers:
     origin_url: git@github.com:IamShobe/tf-state-example.git
     ref: main
     type: git
+  envvar:
+    type: envvar
+  onepassword:
+    type: onepassword
 transformers:
   encryption:
+    # import_from_storage:
+    #   params:
+    #     path: age-key.txt
+    #   provider: encryption
+    # key_type: age
+    # import_from_storage:
+    #   params:
+    #     key: AGE_KEY
+    #   provider: envvar 
     import_from_storage:
       params:
-        path: tf-state.txt
-      provider: encryption
+        reference_uri: op://AutomationIAC/iac-terraform-age-key/password
+      provider: onepassword
     key_type: age
     type: encryption
 version: '2'
