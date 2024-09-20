@@ -7,31 +7,15 @@ stacks:
     transformers:
     - encryption
 storage_providers:
-  encryption:
-    file_mode: 384
-    folder: ~/secrets
-    folder_mode: 448
-    type: local
   git:
     clone_path: null
     origin_url: git@github.com:IamShobe/tf-state-example.git
     ref: main
     type: git
-  envvar:
-    type: envvar
   onepassword:
     type: onepassword
 transformers:
   encryption:
-    # import_from_storage:
-    #   params:
-    #     path: age-key.txt
-    #   provider: encryption
-    # key_type: age
-    # import_from_storage:
-    #   params:
-    #     key: AGE_KEY
-    #   provider: envvar 
     import_from_storage:
       params:
         reference_uri: op://AutomationIAC/iac-terraform-age-key/password
